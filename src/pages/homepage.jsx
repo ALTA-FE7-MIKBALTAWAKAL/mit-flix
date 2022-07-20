@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux"
 import Jumbotron from "../components/jumbotron";
 import Navbar from "../components/navbar";
 import axios from "axios";
 import Card from "../components/card";
-
+import { reduxAction } from "../utils/redux/actions/action"
 
 const Homepage = () => {
-
+    const dispatch = useDispatch();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("This is the homepage");
     const [page, setPage] = useState(1);
@@ -45,6 +46,20 @@ const Homepage = () => {
         }
     };
 
+    const handleFav = (movie) => {
+        const getMovies = localStorage.getItem("favMovies");
+        if (getMovies) {
+            const parsedMovies = JSON.parse(getMovies);
+            parsedMovies.push(movie)
+            localStorage.setItem("favMovies", JSON.stringify(parsedMovies));
+            dispatch(reduxAction("ADD_FAVORITE", parsedMovies));
+        } else {
+            localStorage.setItem("favMovies", JSON.stringify([movie]));
+            dispatch(reduxAction("ADD_FAVORITE", [movie]));
+        }
+        alert("Movie added to favorites");
+    }
+
     return(
         <>
         <Navbar />
@@ -53,7 +68,7 @@ const Homepage = () => {
             <h2>Now Playing</h2>
             <div className="movie-box">
                 {movies.map((movie) => (
-                    <Card key={movie.id} data={movie} />
+                    <Card key={movie.id} data={movie} onClick={() => handleFav(movie)} />
                 ))}
             </div>
         </div>

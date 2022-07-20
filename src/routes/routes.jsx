@@ -9,18 +9,12 @@ import { ThemeContext } from "../utils/context"
 const App = () => {
     const [theme, setTheme] = useState("light");
     const background = useMemo(() => ({theme, setTheme}), [theme])
-    const nav = document.querySelector('.nav')
-    const favlink = document.querySelector('.favlink')
  
     useEffect (() => {
         if (theme === "dark"){
             document.documentElement.classList.add("dark");
-            nav.classList.add("dark");
-            favlink.classList.add("dark");
         } else {
             document.documentElement.classList.remove("dark");
-            nav.classList.remove("dark");
-            favlink.classList.remove("dark");
         }
     }, [theme]);
 

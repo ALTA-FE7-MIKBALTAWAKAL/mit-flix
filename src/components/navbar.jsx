@@ -16,7 +16,7 @@ const Navbar = () => {
             </div></Link>
             <ul>
                 <Link to={"/favorite"}><li className="favlink">Favorites</li></Link>
-                <li>{theme === "dark" ? <IoSunny color="#ecf0f1" onClick={() => handleChangeTheme("light")} /> : <IoMoon color="#2c3e50" onClick={() => handleChangeTheme("dark")} />}</li>
+                <li>{theme === "dark" ? <IoSunny color="#2c3e50" onClick={() => handleChangeTheme("light")} /> : <IoMoon color="#2c3e50" onClick={() => handleChangeTheme("dark")} />}</li>
             </ul>
             
         </nav>
